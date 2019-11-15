@@ -1,4 +1,6 @@
 declare module '@pusher/chatkit-client' {
+  type File = any;
+
   interface TokenProviderConfig {
     url: string;
     queryParams?: object;
