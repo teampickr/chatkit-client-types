@@ -65,6 +65,7 @@ declare module '@pusher/chatkit-client' {
     name: string;
     avatarURL: string;
     presence: { state: Presence };
+    customData?: any;
   }
 
   interface PresenceStateChange {
@@ -73,6 +74,35 @@ declare module '@pusher/chatkit-client' {
   }
 
   type Presence = 'online' | 'offline';
+
+  interface ReadCursorArguments {
+    roomId: string;
+    userId?: string;
+  }
+
+  interface SendMessageArguments {
+    text: string;
+    roomId: string;
+    attachment?: {
+      file?: File;
+      link?: string;
+      type?: 'image' | 'video' | 'audio' | 'file';
+      name?: string;
+    };
+  }
+
+  type MessageFetchDirection = 'older' | 'newer';
+
+  interface FetchMultipartMessagesArguments {
+    roomId: string;
+    initialId?: number;
+    limit?: number;
+    direction?: MessageFetchDirection;
+  }
+
+  interface IsTypingInArguments {
+    roomId: string;
+  }
 
   interface CurrentUser {
     id: string;
@@ -85,6 +115,11 @@ declare module '@pusher/chatkit-client' {
     subscribeToRoomMultipart(config: SubscribeToRoomConfig): Promise<Room>;
     sendMultipartMessage(message: MultipartMessageRequest): Promise<number>;
     setReadCursor(args: SetReadCursorArguments): Promise<void>;
+    readCursor(args: ReadCursorArguments): Cursor;
+    // @deprecated
+    sendMessage(args: SendMessageArguments): Promise<any>;
+    fetchMultipartMessages(args: FetchMultipartMessagesArguments): Promise<any[]>;
+    isTypingIn(args: IsTypingInArguments): Promise<void>;
   }
 
   interface InlineMessagePart {
@@ -124,7 +159,7 @@ declare module '@pusher/chatkit-client' {
   interface SubscribeToRoomConfig {
     roomId: string;
     messageLimit?: number;
-    hooks: {
+    hooks?: {
       onMessage?: (message: Message) => any;
       onMessageDeleted?: (messageId: number) => any;
       onUserStartedTyping?: (user: User) => any;
@@ -178,5 +213,26 @@ declare module '@pusher/chatkit-client' {
   interface SetReadCursorArguments {
     roomId: string;
     position: number;
+  }
+
+  interface BasicRoom {
+    createdAt: string;
+    createdByUserId: string;
+    id: string;
+    isPrivate: boolean;
+    name: string;
+    updatedAt: string;
+    customData?: any;
+    deletedAt: string;
+    unreadCount: number;
+    lastMessageAt: string;
+  }
+
+  interface BasicCursor {
+    position: number;
+    updatedAt: string;
+    userId: string;
+    roomId: string;
+    type: 0;
   }
 }
