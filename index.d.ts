@@ -60,7 +60,7 @@ declare module '@pusher/chatkit-client' {
     customData: object;
     createdAt: string;
     updatedAt: string;
-    deletedAt?: string;
+    deletedAt: string;
     createdByUserId: string;
     userIds: string[];
   }
@@ -213,7 +213,7 @@ declare module '@pusher/chatkit-client' {
     updatedAt: string;
     room: Room;
     user: User;
-    type: number;
+    type: 0;
     userId: string;
     roomId: string;
   }
