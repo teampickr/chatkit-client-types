@@ -1,0 +1,7 @@
+{
+  "name": "@types/pusher__chatkit-client",
+  "description": "Types for @pusher/chatkit-client",
+  "version": "1.0.0",
+  "license": "MIT",
+  "types": "index.d.ts"
+}
