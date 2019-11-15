@@ -58,6 +58,11 @@ declare module '@pusher/chatkit-client' {
     unreadCount?: number;
     lastMessageAt?: string;
     customData: object;
+    createdAt: string;
+    updatedAt: string;
+    deletedAt?: string;
+    createdByUserId: string;
+    userIds: string[];
   }
 
   interface User {
@@ -151,6 +156,7 @@ declare module '@pusher/chatkit-client' {
     sender: User;
     senderId: string;
     room: Room;
+    roomId: string;
     createdAt: string;
     updatedAt: string;
     parts: MessagePart[];
@@ -208,6 +214,8 @@ declare module '@pusher/chatkit-client' {
     room: Room;
     user: User;
     type: number;
+    userId: string;
+    roomId: string;
   }
 
   interface SetReadCursorArguments {
