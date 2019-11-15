@@ -232,8 +232,8 @@ declare module '@pusher/chatkit-client' {
     updatedAt: string;
     customData?: any;
     deletedAt: string;
-    unreadCount: number;
-    lastMessageAt: string;
+    unreadCount?: number;
+    lastMessageAt?: string;
   }
 
   interface BasicCursor {
